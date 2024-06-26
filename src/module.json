@@ -64,6 +64,6 @@
   "manifestPlusVersion": "1.2.1",
 	"url": "https://github.com/pave1-semenov/witcher-trpg-tweaks",
 	"manifest": "https://github.com/pave1-semenov/witcher-trpg-tweaks/releases/download/v0.0.1/module.json",
-	"download": "https://github.com/pave1-semenov/witcher-trpg-tweaks/archive/refs/tags/v1.0.zip",
+	"download": "https://github.com/pave1-semenov/witcher-trpg-tweaks/releases/download/v0.0.1.zip",
 	"readme": "https://github.com/pave1-semenov/witcher-trpg-tweaks/blob/master/README.md"
 }
