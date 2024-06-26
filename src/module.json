@@ -1,17 +1,52 @@
 {
   "$schema": "https://json.schemastore.org/foundryvtt-manifest.json",
-  "id": "foundry-module-ts",
-  "title": "Typescript Template Module",
-  "description": "A template module using Typescript. You should change name, title, and description in module.json.",
-  "version": "1.0.0",
+  "id": "witcher-trpg-tweaks",
+  "title": "Witcher TRPG tweaks",
+  "description": "Various enhancements for the Witcher TRPG system",
+  "version": "0.0.1",
+  "authors": [
+    {
+      "name": "psemenov",
+      "url": "https://github.com/pave1-semenov",
+      "discord": "heavyrain",
+      "twitter": "",
+      "patreon": "",
+      "github": "",
+      "ko-fi": "",
+      "reddit": "",
+      "email": ""
+    }
+  ],
   "packs": [],
-  "system": [],
-  "dependencies": [],
+  "relationships": {
+    "systems": [
+      {
+        "id": "TheWitcherTRPG",
+        "type": "system",
+        "compatibility": {
+          "minimum": "0.0.40",
+          "maximum": "0.0.40"
+        }
+      }
+    ],
+    "requires": [
+      {
+        "id": "lib-wrapper",
+        "type": "module",
+        "manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/latest/download/module.json",
+        "compatibility": {
+          "minimum": "1.0.0.0",
+          "verified": "1.12.6.0"
+        }
+      }
+    ],
+    "conflicts": []
+  },
   "scripts": [],
   "compatibility": {
-    "minimum": "9",
-    "verified": "10",
-    "maximum": "10"
+    "minimum": "11",
+    "verified": "11",
+    "maximum": "11"
   },
   "languages": [
     {
@@ -20,6 +55,15 @@
       "path": "languages/en.json"
     }
   ],
-  "styles": ["style.css"],
-  "esmodules": ["scripts/module.js"]
+  "styles": [
+    "style.css"
+  ],
+  "esmodules": [
+    "scripts/module.js"
+  ],
+  "manifestPlusVersion": "1.2.1",
+	"url": "https://github.com/pave1-semenov/witcher-trpg-tweaks",
+	"manifest": "https://github.com/pave1-semenov/witcher-trpg-tweaks/releases/download/v0.0.1/module.json",
+	"download": "https://github.com/pave1-semenov/witcher-trpg-tweaks/archive/refs/tags/v1.0.zip",
+	"readme": "https://github.com/pave1-semenov/witcher-trpg-tweaks/blob/master/README.md"
 }

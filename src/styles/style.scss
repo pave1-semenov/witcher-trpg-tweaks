@@ -1,16 +1,7 @@
-.window-app .window-content section.module-dog-picture-container {
-  flex: 100;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  margin-top: 10px;
+.item-img-container {
+  margin-right: 10px;
+}
 
-  .module-dog-placeholder {
-    font-size: 200px;
-  }
-
-  img.module-dog-image {
-    object-fit: contain;
-    border: none;
-  }
+.modifier-item {
+  border-bottom: 1px solid var(--color-underline-header);
 }
