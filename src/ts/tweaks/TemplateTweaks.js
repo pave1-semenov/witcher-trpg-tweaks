@@ -13,7 +13,7 @@ export default class TemplateTweaks {
         switch (this.object.type) {
             case 'valuable':
             case 'spell':
-                tmpl = `modules/witcher-trpg-dae/templates/sheet/${type}-sheet.html`; break
+                tmpl = `modules/witcher-trpg-tweaks/templates/sheet/${type}-sheet.html`; break
             default: tmpl = wrapped();
         }
 
