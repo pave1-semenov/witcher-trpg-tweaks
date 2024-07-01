@@ -70,10 +70,15 @@
     {{/each}}
 
     <div class="crit-wounds">
-        <h2>Item Modifiers</h2>
+        <h2>{{localize "WITCHER_TWEKAS.background.ItemModifiers.Title"}}</h2>
 
         {{#each itemModifiers as |mod md|}}
-        <h3>{{mod.name}} ({{#if system.isActive}}Equipped{{else}}Unequipped{{/if}})</h3>
+        <h3>{{mod.name}} ({{#if system.isActive}}
+            {{ localize "WITCHER_TWEKAS.background.ItemModifiers.Equiped"}}
+            {{else}}
+            {{ localize "WITCHER_TWEKAS.background.ItemModifiers.Unequiped"}}
+            {{/if}})
+        </h3>
         <div class="item flex modifier-item" data-item-id="{{mod._id}}">
             <div class="item-img-container">
                 <img src="{{mod.img}}" class="item-img" />

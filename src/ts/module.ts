@@ -2,7 +2,7 @@
 // code and not include them in the build output.
 import "../styles/style.scss";
 import { moduleId } from "./constants";
-import { initTweaks, readyTweaks } from './tweaks/tweaks';
+import { initTweaks, readyTweaks } from './tweaks';
 
 Hooks.once("init", () => {
   console.log(`Initializing ${moduleId}`);

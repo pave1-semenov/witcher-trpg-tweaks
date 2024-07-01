@@ -1,7 +1,7 @@
 import { moduleId } from '../constants';
 import { deepGetByPaths } from '../utils';
 
-export default class ItemTweaks {
+export default class ItemModifiers {
     static get baseAttributePath() {
         return "system.modifiers";
     }
@@ -31,22 +31,22 @@ export default class ItemTweaks {
     static activateExtendedListeners(wrapped, html) {
         wrapped(html);
 
-        html.find(".add-attached-modifier-stat").on("click", ItemTweaks._onAddModifier.bind(this, "stats", "stat"));
-        html.find(".add-attached-modifier-skill").on("click", ItemTweaks._onAddModifier.bind(this, "skills", "skill"));
-        html.find(".add-attached-modifier-derived").on("click", ItemTweaks._onAddModifier.bind(this, "derived", "derivedStat"));
+        html.find(".add-attached-modifier-stat").on("click", ItemModifiers._onAddModifier.bind(this, "stats", "stat"));
+        html.find(".add-attached-modifier-skill").on("click", ItemModifiers._onAddModifier.bind(this, "skills", "skill"));
+        html.find(".add-attached-modifier-derived").on("click", ItemModifiers._onAddModifier.bind(this, "derived", "derivedStat"));
 
-        html.find(".attached-modifiers-edit").on("change", ItemTweaks._onEditModifier.bind(this, "stats"));
-        html.find(".attached-modifiers-edit-skills").on("change", ItemTweaks._onEditModifier.bind(this, "skills"));
-        html.find(".attached-modifiers-edit-derived").on("change", ItemTweaks._onEditModifier.bind(this, "derived"));
+        html.find(".attached-modifiers-edit").on("change", ItemModifiers._onEditModifier.bind(this, "stats"));
+        html.find(".attached-modifiers-edit-skills").on("change", ItemModifiers._onEditModifier.bind(this, "skills"));
+        html.find(".attached-modifiers-edit-derived").on("change", ItemModifiers._onEditModifier.bind(this, "derived"));
 
-        html.find(".remove-attached-modifier-stat").on("click", ItemTweaks._onDeleteModifier.bind(this, "stats"));
-        html.find(".remove-attached-modifier-skill").on("click", ItemTweaks._onDeleteModifier.bind(this, "skills"));
-        html.find(".remove-attached-modifier-derived").on("click", ItemTweaks._onDeleteModifier.bind(this, "derived"));
+        html.find(".remove-attached-modifier-stat").on("click", ItemModifiers._onDeleteModifier.bind(this, "stats"));
+        html.find(".remove-attached-modifier-skill").on("click", ItemModifiers._onDeleteModifier.bind(this, "skills"));
+        html.find(".remove-attached-modifier-derived").on("click", ItemModifiers._onDeleteModifier.bind(this, "derived"));
     }
 
     static async onUpdate(wrapped, event, formData) {
         await wrapped(event, formData);
-        ItemTweaks.updateAttachedModifier(this.item, this.actor);
+        ItemModifiers.updateAttachedModifier(this.item, this.actor);
     }
 
     static async onInventoryUpdate(wrapped, event) {
@@ -56,7 +56,7 @@ export default class ItemTweaks {
         let itemId = element.closest(".item").dataset.itemId;
         let item = this.actor.items.get(itemId);
         if (item.system.modifiers) {
-            ItemTweaks.updateAttachedModifier(item, this.actor)
+            ItemModifiers.updateAttachedModifier(item, this.actor)
         }
 
         return promise;
@@ -66,11 +66,11 @@ export default class ItemTweaks {
     static _onAddModifier(modifier, key, event) {
         event.preventDefault();
 
-        const path = ItemTweaks.getPath(modifier);
+        const path = ItemModifiers.getPath(modifier);
         let current = deepGetByPaths(this.item, path)
         let newModifierList = current ? current : [];
 
-        newModifierList.push({ id: ItemTweaks.genId(), [key]: "none", modifier: 0 })
+        newModifierList.push({ id: ItemModifiers.genId(), [key]: "none", modifier: 0 })
         this.item.update({ [path]: newModifierList });
     }
 
@@ -82,7 +82,7 @@ export default class ItemTweaks {
         let field = element.dataset.field;
         let value = element.value;
 
-        const path = ItemTweaks.getPath(modifier);
+        const path = ItemModifiers.getPath(modifier);
         let modifiers = deepGetByPaths(this.item, path)
         let objIndex = modifiers.findIndex((obj => obj.id == itemId));
         modifiers[objIndex][field] = value
@@ -96,7 +96,7 @@ export default class ItemTweaks {
         let element = event.currentTarget;
         let itemId = element.closest(".list-item").dataset.id;
 
-        const path = ItemTweaks.getPath(modifier);
+        const path = ItemModifiers.getPath(modifier);
         let modifiers = deepGetByPaths(this.item, path)
 
         let newModifierList = modifiers.filter(item => item.id !== itemId)

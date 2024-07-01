@@ -1,6 +1,6 @@
 import { moduleId } from '../constants';
 
-export default class TemplateTweaks {
+export default class TemplateOverrides {
     static init(lw) {
         lw.register(moduleId, 'CONFIG.Item.sheetClasses.spell["witcher.WitcherItemSheet"].cls.prototype.template', this.itemsTemplate, "MIXED");
         lw.register(moduleId, 'CONFIG.Actor.sheetClasses.character["witcher.WitcherActorSheet"].cls.prototype.template', this.characterTemplate, "OVERRIDE");

@@ -1,8 +1,8 @@
 import { moduleId } from '../constants';
 
-export default class SpellTweaks {
+export default class SpellMacros {
     static init(lw) {
-        lw.register(moduleId, 'CONFIG.Actor.sheetClasses.character["witcher.WitcherActorSheet"].cls.prototype._onSpellRoll', SpellTweaks.macroSpell, "WRAPPER");
+        lw.register(moduleId, 'CONFIG.Actor.sheetClasses.character["witcher.WitcherActorSheet"].cls.prototype._onSpellRoll', SpellMacros.macroSpell, "WRAPPER");
     }
     
     static async macroSpell(wrapped, event, itemId = null) {
