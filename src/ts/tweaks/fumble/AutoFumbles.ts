@@ -41,7 +41,7 @@ export default class AutoFumbles {
         const description = this.getFumbleDescription(value, type)
         let fumbleHtml = $(`<p class="fumble-details">${description}</p>`);
 
-        const resolver = this.getFumbleResolver(messageData, value, type)
+        const resolver = this.getFumbleResolver(messageData, html, value, type)
         resolver?.render(fumbleHtml)
 
         html.find('.dice-fail:first').append(fumbleHtml)
@@ -117,7 +117,7 @@ export default class AutoFumbles {
         return `<b>${typeLabel}</b>: ${fumbleEffect}`;
     }
 
-    private getFumbleResolver(messageData: t.ChatMessageData, value: number, rollType: t.RollType): AbstractFumbleResolver | null {
+    private getFumbleResolver(messageData: t.ChatMessageData, container: JQuery, value: number, rollType: t.RollType): AbstractFumbleResolver | null {
         let resolver = null
         //@ts-expect-error
         let speaker = ChatMessage.getSpeaker(messageData)
@@ -128,7 +128,7 @@ export default class AutoFumbles {
 
         switch (rollType) {
             case t.RollType.ATTACK_WITH_MELEE_WEAPON:
-                resolver = new MeleeWeaponFumbleResolver(actor, value, messageData.flags.item)
+                resolver = new MeleeWeaponFumbleResolver(actor, value, container, messageData.flags.item)
                 break
         }
 

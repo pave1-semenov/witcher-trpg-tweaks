@@ -1,7 +1,7 @@
-import { getGame, translate } from "../../../utils"
+import { getCurrentActor, translate } from "../../../utils"
 
 export default abstract class AbstractFumbleResolver {
-    constructor(readonly actor: Actor, readonly value: number) {
+    constructor(readonly actor: Actor, readonly value: number, readonly container: JQuery) {
 
     }
 
@@ -9,33 +9,43 @@ export default abstract class AbstractFumbleResolver {
         if (this.shouldRender()) {
             const attributes = mergeObject(this.defaultAttributes(), this.getButtonAttributes())
             const dataAttributes = Object.entries(attributes).map(([key, value]) => `data-${key}='${value}'`).join(' ')
-            const button = $(`<button class="apply-fumble" data-actor='${this.actor.id}' ${dataAttributes}>${translate('WITCHER_TWEAKS.Fumble.Apply')}</button>`)
+            const button = $(`<button class="apply-fumble" ${dataAttributes}>${this.getButtonLabel()}</button>`)
             html.append(button)
         }
     }
 
+    getButtonLabel() {
+        return translate('WITCHER_TWEAKS.Fumble.Apply');
+    }
+
     defaultAttributes() {
         return {
-            "actor": this.actor,
             "value": this.value
         }
     }
 
-    public static restoreDefaultParams(event: Event): DefaultParams {
+    public static restoreDefaultParams(event: Event): DefaultParams|undefined {
         event.preventDefault()
+        const actor = getCurrentActor()
+        if (!actor) {
+            ui.notifications.error(translate("WITCHER.Context.SelectActor"))
+            return
+        }
         //@ts-expect-error
         const target = $(event.target) as unknown as JQuery<HTMLElement>
-        const actorId = target.data('actor')
+        const container = target.closest('.chat-message')
         const value = target.data('value')
-        const actor = getGame().actors?.get(actorId) as Actor
-        const isValid = target && actor && value
 
-        return {
-            actor: actor,
-            value: value,
-            target: target,
-            isValid: isValid
+        if (actor && value && target && container) {
+            return {
+                actor: actor,
+                value: value,
+                target: target,
+                container: container
+            }
         }
+
+        return
     }
 
     shouldRender(): boolean {
@@ -49,5 +59,5 @@ interface DefaultParams {
     actor: Actor
     value: number
     target: JQuery<HTMLElement>
-    isValid: boolean
+    container: JQuery<HTMLElement>
 }

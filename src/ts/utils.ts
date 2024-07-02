@@ -13,13 +13,21 @@ export function deepGetByPaths(obj: Object, path: string): any {
 }
 
 export function translate(label: string) {
-    return getGame().i18n.localize(label)
+    return game.i18n.localize(label)
 }
 
 export function translateFormat(label: string, args: Record<string, any>) {
-    return getGame().i18n.format(label, args)
+    return game.i18n.format(label, args)
 }
 
-export function getGame(): Game {
-    return game as Game
+export function getCurrentActor() {
+    let controlledTokens = canvas.tokens?.controlled.slice() || []
+    let actor: Actor | null;
+    if (controlledTokens?.length == 0 && game.user?.character) {
+        actor = game.user.character
+    } else {
+        actor = controlledTokens[0]?.actor
+    }
+
+    return actor
 }

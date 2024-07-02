@@ -135,3 +135,28 @@ interface WeaponParams {
     reliable: number
     maxReliability: number
 }
+
+export interface AttackLocationData {
+    name: AttackLocation,
+    alias: string,
+    locationFormula: string,
+    modifier: string
+}
+
+enum AttackLocation {
+    HEAD = "Head",
+    TORSO = "Torso",
+    LEFT_ARM = "L. Arm",
+    RIGHT_ARM = "R. Arm",
+    LEFT_LEG = "L. Leg",
+    RIGHT_LEG = "R. Leg"
+}
+
+export const ATTACK_LOCATIONS_MAPPING: Record<AttackLocation, number> = {
+    [AttackLocation.HEAD]: 1,
+    [AttackLocation.TORSO]: Math.round(Math. random() * (4 - 2) + 2),
+    [AttackLocation.RIGHT_ARM]: 5,
+    [AttackLocation.LEFT_ARM]: 6,
+    [AttackLocation.RIGHT_LEG]: Math.round(Math.random() + 7),
+    [AttackLocation.LEFT_LEG]: Math.round(Math. random() + 9)
+}
